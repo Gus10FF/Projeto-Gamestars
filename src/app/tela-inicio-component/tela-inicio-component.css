@@ -1,0 +1,29 @@
+/* Container dos Filtros e da Barra Lateral */
+.filter-section, .sidebar-section {
+  background-color: #21272e !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Selects dos Filtros */
+.custom-select {
+  background-color: #161b22 !important;
+  color: #ffffff !important;
+  border: 1px solid #30363d !important;
+}
+
+/* Cards dos Jogos */
+.game-card {
+  background-color: transparent !important;
+}
+
+.game-card img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+/* Linhas da barra lateral */
+.sidebar-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
