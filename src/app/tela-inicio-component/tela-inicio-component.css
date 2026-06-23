@@ -22,8 +22,31 @@
   border: 1px solid rgb(255, 255, 255);
 }
 
-/* Linhas da barra lateral */
 .sidebar-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   padding-bottom: 8px;
+}
+
+.sidebar-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+.star-container {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  margin-right: 2px;
+}
+
+.star-empty {
+  color: #b9b9b9;
+}
+
+.star-filled {
+  color: #ffc107;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
