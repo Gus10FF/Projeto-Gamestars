@@ -1,0 +1,102 @@
+<div class="auth-page d-flex align-items-center justify-content-center">
+  <div class="auth-card p-4 p-md-5">
+
+    <span class="auth-badge mb-3 d-inline-block">
+      ★ Crie sua conta
+    </span>
+
+    <h1 class="auth-title">Cadastrar</h1>
+
+    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- Nome -->
+      <div class="mb-3">
+        <label for="nome" class="auth-label">Nome</label>
+        <input
+          id="nome"
+          type="text"
+          class="form-control auth-input"
+          [class.is-invalid]="nome.invalid && nome.touched"
+          formControlName="nome"
+          placeholder="Seu nome completo"
+        />
+        <div class="invalid-feedback" *ngIf="nome.invalid && nome.touched">
+          Informe um nome válido (mínimo 3 caracteres).
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="auth-label">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control auth-input"
+          [class.is-invalid]="email.invalid && email.touched"
+          formControlName="email"
+          placeholder="seu@email.com"
+          autocomplete="email"
+        />
+        <div class="invalid-feedback" *ngIf="email.invalid && email.touched">
+          Informe um e-mail válido.
+        </div>
+      </div>
+
+      <!-- Senha -->
+      <div class="mb-3">
+        <label for="password" class="auth-label">Senha</label>
+        <div class="input-group">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control auth-input"
+            [class.is-invalid]="password.invalid && password.touched"
+            formControlName="password"
+            placeholder="••••••••"
+            autocomplete="new-password"
+          />
+          <button
+            class="btn auth-eye-btn"
+            type="button"
+            (click)="togglePassword()"
+            aria-label="Mostrar senha"
+          >
+            <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+          </button>
+          <div class="invalid-feedback" *ngIf="password.invalid && password.touched">
+            A senha deve ter no mínimo 6 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmar Senha -->
+      <div class="mb-3">
+        <label for="confirmar" class="auth-label">Confirmar Senha</label>
+        <input
+          id="confirmar"
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control auth-input"
+          [class.is-invalid]="confirmar.invalid && confirmar.touched || cadastroForm.errors?.['mismatch']"
+          formControlName="confirmar"
+          placeholder="Repita sua senha"
+        />
+        <div class="invalid-feedback" *ngIf="confirmar.invalid && confirmar.touched">
+          Confirme sua senha.
+        </div>
+        <div class="invalid-feedback" *ngIf="cadastroForm.errors?.['mismatch']">
+  As senhas não coincidem.
+</div>
+
+      </div>
+
+      <!-- Botão -->
+      <button type="submit" class="btn auth-btn-primary w-100 mb-3">Cadastrar</button>
+    </form>
+
+    <p class="text-center auth-check-label mb-0">
+      Já tem conta?
+      <a class="auth-link" routerLink="/login">Entrar</a>
+    </p>
+
+  </div>
+</div>
