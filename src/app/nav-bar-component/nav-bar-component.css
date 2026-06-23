@@ -23,7 +23,7 @@
   border: none;
 }
 .navbar-logo {
-  height: 100px; /* Define uma altura sutil e elegante para o topo */
+  height: 50px; /* Define uma altura sutil e elegante para o topo */
   width: auto;  /* Mantém a proporção da imagem sem achatar */
   object-fit: contain;
   mix-blend-mode: screen;
