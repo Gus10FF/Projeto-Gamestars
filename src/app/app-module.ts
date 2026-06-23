@@ -8,9 +8,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavBarComponent } from './nav-bar-component/nav-bar-component';
 import { LoginComponent } from './login-component/login-component';
 import { CadastroComponent } from './cadastro-component/cadastro-component';
+import { PaginaJogoComponent } from './pagina-jogo-component/pagina-jogo-component';
 
 @NgModule({
-  declarations: [App, TelaInicioComponent, NavBarComponent, LoginComponent, CadastroComponent],
+  declarations: [
+    App,
+    TelaInicioComponent,
+    NavBarComponent,
+    LoginComponent,
+    CadastroComponent,
+    PaginaJogoComponent,
+  ],
 
   imports: [BrowserModule, AppRoutingModule, NgbModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners()],

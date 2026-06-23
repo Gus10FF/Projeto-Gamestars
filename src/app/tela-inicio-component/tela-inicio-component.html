@@ -27,7 +27,7 @@
       <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3">
 
         <div class="col" *ngFor="let jogo of meusJogos">
-          <div class="card game-card h-100 border-0 position-relative">
+          <button type="button" class="card game-card h-100 border-0 position-relative text-start bg-transparent p-0 w-100" [routerLink]="['/jogos', jogo.id]">
             <span class="badge bg-dark position-absolute top-0 end-0 m-2 opacity-75">{{ jogo.ano }}</span>
 
             <img [src]="jogo.imagem" class="card-img-top rounded" [alt]="jogo.nome">
@@ -52,7 +52,7 @@
 
               </div>
             </div>
-          </div>
+          </button>
         </div>
 
       </div>
