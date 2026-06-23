@@ -35,7 +35,18 @@
             <div class="card-body p-2 d-flex flex-column justify-content-between">
               <div>
                 <h6 class="card-title text-white text-truncate mb-1 m-0">{{ jogo.nome }}</h6>
-                <p class="card-text text-muted small mb-2">⭐ {{ jogo.nota }} </p>
+
+                <div class="d-flex align-items-top gap-2">
+                  <p class="card-text text-muted small mb-2" >{{ jogo.nota }} </p>
+                  <ngb-rating [max]="5" [(rate)]="jogo.nota" [readonly]="true" >
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star-container">
+                        <span class="star-empty">&#9733;</span>
+                        <span class="star-filled" [style.width.%]="fill">&#9733;</span>
+                      </span>
+                    </ng-template>
+                  </ngb-rating>
+                </div>
               </div>
               <div class="d-flex gap-1 flex-wrap">
 
