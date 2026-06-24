@@ -1,1 +1,192 @@
-<h2></h2>
+<div class="pagina-jogo" *ngIf="jogo">
+
+  <!-- Hero Banner -->
+  <div class="hero-banner position-relative">
+    <div class="hero-overlay"></div>
+    <img [src]="jogo.imagem" [alt]="jogo.nome" class="hero-bg-img">
+    <div class="hero-content container-fluid px-4 py-4 position-relative">
+      <div class="row g-4 align-items-end">
+
+        <!-- Capa do Jogo -->
+        <div class="col-auto">
+          <img [src]="jogo.imagem" [alt]="jogo.nome" class="game-cover shadow">
+        </div>
+
+        <!-- Informações Principais -->
+        <div class="col">
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <span class="badge badge-platform" *ngFor="let plataforma of jogo.plataformas">{{ plataforma }}</span>
+          </div>
+          <h1 class="game-title mb-1">{{ jogo.nome }}</h1>
+          <p class="game-developer text-muted mb-2">{{ jogo.desenvolvedor }} · {{ jogo.ano }}</p>
+          <div class="d-flex align-items-center gap-3 flex-wrap">
+            <div class="d-flex align-items-center gap-2">
+              <ngb-rating [max]="5" [(rate)]="jogo.nota" [readonly]="true">
+                <ng-template let-fill="fill">
+                  <span class="star-container">
+                    <span class="star-empty">&#9733;</span>
+                    <span class="star-filled" [style.width.%]="fill">&#9733;</span>
+                  </span>
+                </ng-template>
+              </ngb-rating>
+              <span class="nota-valor fw-bold">{{ jogo.nota }}</span>
+              <span class="text-muted small">({{ jogo.totalAvaliacoes }} avaliações)</span>
+            </div>
+            <div class="d-flex gap-1 flex-wrap">
+              <span class="badge badge-genre" *ngFor="let genero of jogo.generos">{{ genero }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Corpo Principal -->
+  <div class="container-fluid px-4 py-4">
+    <div class="row g-4">
+
+      <!-- Coluna Principal -->
+      <main class="col-lg-8">
+
+        <!-- Descrição -->
+        <section class="section-card mb-4">
+          <h2 class="section-title">Sobre o jogo</h2>
+          <p class="text-muted game-description">{{ jogo.descricao }}</p>
+          <div class="d-flex gap-4 mt-3 flex-wrap game-meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Desenvolvedor</span>
+              <span class="meta-value">{{ jogo.desenvolvedor }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Publicado em</span>
+              <span class="meta-value">{{ jogo.ano }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Plataformas</span>
+              <span class="meta-value">{{ jogo.plataformas.join(', ') }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Avaliações -->
+        <section class="section-card mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="section-title mb-0">Avaliações</h2>
+            <button class="btn btn-avaliar">+ Avaliar jogo</button>
+          </div>
+
+          <!-- Resumo de notas -->
+          <div class="rating-summary d-flex gap-4 align-items-center mb-4 p-3 rounded">
+            <div class="text-center">
+              <div class="nota-grande">{{ jogo.nota }}</div>
+              <ngb-rating [max]="5" [(rate)]="jogo.nota" [readonly]="true">
+                <ng-template let-fill="fill">
+                  <span class="star-container">
+                    <span class="star-empty">&#9733;</span>
+                    <span class="star-filled" [style.width.%]="fill">&#9733;</span>
+                  </span>
+                </ng-template>
+              </ngb-rating>
+              <div class="text-muted small mt-1">{{ jogo.totalAvaliacoes }} avaliações</div>
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center gap-2 mb-1" *ngFor="let barra of barrasNota">
+                <span class="rating-bar-label small text-muted">{{ barra.estrelas }}★</span>
+                <div class="rating-bar-track flex-grow-1">
+                  <div class="rating-bar-fill" [style.width.%]="barra.percentual"></div>
+                </div>
+                <span class="text-muted small" style="width:28px">{{ barra.percentual }}%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lista de avaliações -->
+          <div class="avaliacao-item mb-3" *ngFor="let avaliacao of jogo.avaliacoes">
+            <div class="d-flex justify-content-between align-items-start mb-1">
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar-circle">{{ avaliacao.usuario.charAt(0).toUpperCase() }}</div>
+                <div>
+                  <span class="fw-semibold text-white">{{ avaliacao.usuario }}</span>
+                  <div class="d-flex align-items-center gap-1 mt-0">
+                    <ngb-rating [max]="5" [(rate)]="avaliacao.nota" [readonly]="true">
+                      <ng-template let-fill="fill">
+                        <span class="star-container star-sm">
+                          <span class="star-empty">&#9733;</span>
+                          <span class="star-filled" [style.width.%]="fill">&#9733;</span>
+                        </span>
+                      </ng-template>
+                    </ngb-rating>
+                    <span class="text-muted small">{{ avaliacao.nota }}/5</span>
+                  </div>
+                </div>
+              </div>
+              <span class="text-muted small">{{ avaliacao.data }}</span>
+            </div>
+            <p class="text-muted mb-2 ps-5">{{ avaliacao.texto }}</p>
+
+            <!-- Comentários da avaliação -->
+            <div class="comentarios-avaliacao ps-5" *ngIf="avaliacao.comentarios && avaliacao.comentarios.length > 0">
+              <div class="comentario-item mb-2 p-2 rounded" *ngFor="let comentario of avaliacao.comentarios">
+                <div class="d-flex gap-2 align-items-center mb-1">
+                  <div class="avatar-circle avatar-sm">{{ comentario.usuario.charAt(0).toUpperCase() }}</div>
+                  <span class="fw-semibold text-white small">{{ comentario.usuario }}</span>
+                  <span class="text-muted" style="font-size:0.7rem">{{ comentario.data }}</span>
+                </div>
+                <p class="text-muted mb-0 small ps-4">{{ comentario.texto }}</p>
+              </div>
+            </div>
+
+            <!-- Responder avaliação -->
+            <div class="ps-5 mt-2">
+              <button class="btn btn-responder btn-sm">Responder</button>
+            </div>
+            <hr class="divider-avaliacao mt-3 mb-0">
+          </div>
+        </section>
+      </main>
+
+      <!-- Sidebar de Preços -->
+      <aside class="col-lg-4">
+        <div class="section-card sticky-sidebar">
+          <h2 class="section-title mb-3">Preços nas lojas</h2>
+          <div class="d-flex flex-column gap-2">
+            <a [href]="loja.link" target="_blank" class="preco-card d-flex align-items-center justify-content-between p-3 rounded text-decoration-none"
+               *ngFor="let loja of jogo.precos"
+               [class.melhor-preco]="loja.melhorPreco">
+              <div class="d-flex align-items-center gap-2">
+                <img [src]="loja.logo" [alt]="loja.nome" class="loja-logo">
+                <span class="loja-nome text-white">{{ loja.nome }}</span>
+              </div>
+              <div class="text-end">
+                <span class="preco-original text-muted text-decoration-line-through small d-block" *ngIf="loja.precoOriginal">R$ {{ loja.precoOriginal }}</span>
+                <span class="preco-atual fw-bold" [class.text-success]="loja.melhorPreco" [class.text-white]="!loja.melhorPreco">
+                  R$ {{ loja.preco }}
+                </span>
+                <span class="badge badge-desconto ms-1" *ngIf="loja.desconto">-{{ loja.desconto }}%</span>
+              </div>
+            </a>
+          </div>
+          <p class="text-muted small mt-2 mb-0">* Preços podem variar. Atualizado hoje.</p>
+        </div>
+
+        <!-- Jogos Similares -->
+        <div class="section-card mt-4">
+          <h2 class="section-title mb-3">Jogos similares</h2>
+          <div class="d-flex flex-column gap-2">
+            <button class="btn p-0 text-start bg-transparent border-0 similar-item d-flex align-items-center gap-2"
+                    *ngFor="let similar of jogosSimilares"
+                    [routerLink]="['/jogos', similar.id]">
+              <img [src]="similar.imagem" [alt]="similar.nome" class="similar-cover rounded">
+              <div>
+                <h6 class="text-white mb-0 small">{{ similar.nome }}</h6>
+                <span class="text-success small">⭐ {{ similar.nota }}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>

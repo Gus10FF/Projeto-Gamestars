@@ -1,0 +1,363 @@
+/* =============================================
+   PÁGINA DE JOGO — GameStars
+   ============================================= */
+
+/* --- Hero Banner --- */
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+  min-height: 240px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: blur(18px) brightness(0.35) saturate(1.2);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15,15,20,0.3) 0%, rgba(15,15,20,0.92) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  z-index: 2;
+  width: 100%;
+}
+
+/* --- Capa --- */
+.game-cover {
+  width: 130px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+/* --- Título e info --- */
+.game-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+
+.game-developer {
+  font-size: 0.9rem;
+  color: #c4c9d9;
+}
+
+.nota-valor {
+  font-size: 1.1rem;
+  color: #fbbf24;
+}
+
+/* --- Badges --- */
+.badge-platform {
+  background: rgba(255,255,255,0.16);
+  color: #edf2f7;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-genre {
+  background: rgba(99, 179, 237, 0.15);
+  color: #63b3ed;
+  border: 1px solid rgba(99, 179, 237, 0.3);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.badge-desconto {
+  background: #16a34a;
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* --- Cards de seção --- */
+.section-card {
+  background: #1a1d27;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+/* --- Descrição --- */
+.game-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cdd5e0;
+}
+
+.game-meta-grid {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.meta-value {
+  font-size: 0.9rem;
+  color: #edf2f7;
+  font-weight: 500;
+}
+
+/* --- Botão avaliar --- */
+.btn-avaliar {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.btn-avaliar:hover {
+  opacity: 0.88;
+  color: #fff;
+}
+
+/* --- Resumo de rating --- */
+.rating-summary {
+  background: #13151f;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.nota-grande {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fbbf24;
+  line-height: 1;
+}
+
+.rating-bar-track {
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  height: 7px;
+  overflow: hidden;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  background: #fbbf24;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.rating-bar-label {
+  width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+  color: #b0bac9 !important;
+}
+
+/* Sobrescreve .text-muted do Bootstrap dentro dos cards */
+.section-card .text-muted,
+.rating-summary .text-muted {
+  color: #b0bac9 !important;
+}
+
+/* --- Avaliações --- */
+.avaliacao-item {
+  padding-top: 0.5rem;
+}
+
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-circle.avatar-sm {
+  width: 26px;
+  height: 26px;
+  font-size: 0.7rem;
+}
+
+.divider-avaliacao {
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* --- Comentários de avaliação --- */
+.comentarios-avaliacao {
+  border-left: 2px solid rgba(99, 179, 237, 0.25);
+  margin-left: 1.2rem;
+}
+
+.comentario-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.btn-responder {
+  background: transparent;
+  color: #63b3ed;
+  border: 1px solid rgba(99, 179, 237, 0.3);
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 5px;
+  transition: background 0.15s;
+}
+
+.btn-responder:hover {
+  background: rgba(99, 179, 237, 0.1);
+  color: #63b3ed;
+}
+
+/* --- Stars --- */
+.star-container {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.star-container.star-sm {
+  font-size: 0.8rem;
+}
+
+.star-empty {
+  color: #4a5568;
+}
+
+.star-filled {
+  color: #fbbf24;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* --- Preços nas lojas --- */
+.preco-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.preco-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.14);
+}
+
+.preco-card.melhor-preco {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.06);
+}
+
+.loja-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.loja-nome {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.preco-atual {
+  font-size: 1rem;
+}
+
+.preco-original {
+  font-size: 0.75rem;
+}
+
+/* --- Jogos similares --- */
+.similar-item {
+  padding: 6px 0;
+  transition: opacity 0.15s;
+}
+
+.similar-item:hover {
+  opacity: 0.8;
+}
+
+.similar-cover {
+  width: 44px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+
+/* --- Sticky sidebar --- */
+.sticky-sidebar {
+  position: sticky;
+  top: 1rem;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 1.4rem;
+  }
+
+  .game-cover {
+    width: 90px;
+    height: 118px;
+  }
+
+  .nota-grande {
+    font-size: 2rem;
+  }
+
+  .sticky-sidebar {
+    position: static;
+  }
+}
