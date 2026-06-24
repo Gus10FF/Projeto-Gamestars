@@ -53,12 +53,7 @@ export class PaginaJogoComponent implements OnInit {
   jogoSelecionado: any;
   jogo: any;
   barrasNota: { estrelas: number; percentual: number }[] = [];
-
- jogosSimilares = [
-    { id: 2, nome: 'Enter The Gungeon', nota: 4.8, imagem: 'jogos/Enter the Gungeon.jpeg' },
-    { id: 6, nome: 'Dust: An Elysian Tail', nota: 4.5, imagem: 'jogos/Dust.jpeg' },
-    { id: 8, nome: 'Hotline Miami', nota: 4.7, imagem: 'jogos/HM.jpeg' },
-  ];
+  jogosSimilares: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,9 +65,15 @@ export class PaginaJogoComponent implements OnInit {
     if (id) {
       // Usa o método do serviço para buscar o jogo
       this.jogoSelecionado = this.jService.getJogoPorId(Number(id));
-console.log(this.jogoSelecionado);
+      if (this.jogoSelecionado) {
+      // Passa o array de gêneros (this.jogoSelecionado.generos)
+      this.jogosSimilares = this.jService.getJogosPorGeneros(
+        this.jogoSelecionado.generos, // Note o 's' se mudou o nome da propriedade para generos
+        id
+      );
+console.log(this.jogosSimilares);
+      }
     }
-
   }
 
   private calcularBarrasNota(avaliacoes: Avaliacao[]): void {

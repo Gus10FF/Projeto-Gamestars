@@ -275,4 +275,13 @@ export class JogoService{
     return this.todosJogos.find(jogo => jogo.id === id);
   }
 
+  getJogosPorGeneros(generosDoJogoAtual: string[], idAtual: number) {
+    return this.todosJogos.filter(jogo => {
+      // 1. Ignora o próprio jogo atual
+      if (jogo.id === idAtual) return false;
+
+      // 2. Verifica se o jogo atual tem PELO MENOS UM gênero igual aos do jogo buscado
+      return jogo.generos.some(genero => generosDoJogoAtual.includes(genero));
+    });
+  }
 }
