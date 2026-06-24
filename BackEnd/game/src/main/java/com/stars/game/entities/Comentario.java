@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "comentarios")
+@Table(name = "tbl_comentarios")
 public class Comentario {
 
     @Id

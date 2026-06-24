@@ -2,8 +2,9 @@ package com.stars.game.entities;
 
 import java.util.List;
 
+import org.hibernate.annotations.Formula;
+
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 
@@ -33,20 +34,9 @@ public class Jogo{
 
     private List<String> generos;
 
-    private Long totalAvaliacoes;
+    @Formula("(SELECT COUNT(*) FROM tbl_resenhas a WHERE a.jogo_id = id)")
+    private Long totalResenhas;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "jogo_id") // Cria a chave estrangeira na tabela tbl_avaliacoes
-    private List<@Valid Resenha> resenhas;
-
-
-    public List<Resenha> getResenhas() {
-        return resenhas;
-    }
-
-    public void setResenhas(List<Resenha> resenhas) {
-        this.resenhas = resenhas;
-    }
 
     public Long getId() {
         return id;
@@ -120,13 +110,12 @@ public class Jogo{
         this.generos = generos;
     }
 
-    public Long getTotalAvaliacoes() {
-        return totalAvaliacoes;
+    public Long getTotalResenhas() {
+        return totalResenhas;
     }
 
-    public void setTotalAvaliacoes(Long totalAvaliacoes) {
-        this.totalAvaliacoes = totalAvaliacoes;
+    public void setTotalResenhas(Long totalResenhas) {
+        this.totalResenhas = totalResenhas;
     }
-
     
 }
