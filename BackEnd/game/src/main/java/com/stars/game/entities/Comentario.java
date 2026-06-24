@@ -1,0 +1,61 @@
+package com.stars.game.entities;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
+@Table(name = "comentarios")
+public class Comentario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "O nome do usuário do comentário é obrigatório")
+    private String usuario;
+
+    @NotBlank(message = "O texto do comentário não pode estar vazio")
+    @Size(max = 500, message = "O comentário deve ter no máximo 500 caracteres")
+    private String texto;
+
+    @NotNull(message = "A data do comentário é obrigatória")
+    @PastOrPresent(message = "A data do comentário não pode ser futura")
+    @JsonFormat(pattern = "d MMM. yyyy", locale = "pt-BR")
+    private LocalDate data;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    
+}
