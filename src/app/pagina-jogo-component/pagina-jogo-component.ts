@@ -51,7 +51,6 @@ interface Jogo {
 export class PaginaJogoComponent implements OnInit {
 
   jogoSelecionado: any;
-  jogo: any;
   barrasNota: { estrelas: number; percentual: number }[] = [];
   jogosSimilares: any;
 
@@ -66,12 +65,13 @@ export class PaginaJogoComponent implements OnInit {
       // Usa o método do serviço para buscar o jogo
       this.jogoSelecionado = this.jService.getJogoPorId(Number(id));
       if (this.jogoSelecionado) {
+         this.calcularBarrasNota(this.jogoSelecionado.avaliacoes);
       // Passa o array de gêneros (this.jogoSelecionado.generos)
       this.jogosSimilares = this.jService.getJogosPorGeneros(
         this.jogoSelecionado.generos, // Note o 's' se mudou o nome da propriedade para generos
         id
       );
-console.log(this.jogosSimilares);
+
       }
     }
   }
