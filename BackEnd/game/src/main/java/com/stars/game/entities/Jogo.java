@@ -2,9 +2,8 @@ package com.stars.game.entities;
 
 import java.util.List;
 
-import org.hibernate.annotations.Formula;
-
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 
@@ -19,7 +18,7 @@ public class Jogo{
     @NotBlank(message = "O nome não pode estar em branco")
     private String name;
 
-    @NotNull
+    @NotNull(message = "O ano é obrigatório")
     private Integer ano;
 
     private Double nota;
@@ -28,94 +27,65 @@ public class Jogo{
 
     private String desenvolvedor;
 
-    private String descrição;
+    @Column(length = 1000)
+    private String descricao;
 
+    @ElementCollection
+    @CollectionTable(name = "tbl_jogo_plataformas", joinColumns = @JoinColumn(name = "jogo_id"))
     private List<String> plataformas;
 
+    @ElementCollection
+    @CollectionTable(name = "tbl_jogo_generos", joinColumns = @JoinColumn(name = "jogo_id"))
     private List<String> generos;
 
-    @Formula("(SELECT COUNT(*) FROM tbl_resenhas a WHERE a.jogo_id = id)")
+    @Transient
     private Long totalResenhas;
 
+    @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<@Valid Resenha> resenhas;
+public Jogo() {}
 
-    public Long getId() {
-        return id;
-    }
+    // Getters e Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public Integer getAno() { return ano; }
+    public void setAno(Integer ano) { this.ano = ano; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public Double getNota() { return nota; }
+    public void setNota(Double nota) { this.nota = nota; }
 
-    public Integer getAno() {
-        return ano;
-    }
+    public String getImagem() { return imagem; }
+    public void setImagem(String imagem) { this.imagem = imagem; }
 
-    public void setAno(Integer ano) {
-        this.ano = ano;
-    }
+    public String getDesenvolvedor() { return desenvolvedor; }
+    public void setDesenvolvedor(String desenvolvedor) { this.desenvolvedor = desenvolvedor; }
 
-    public Double getNota() {
-        return nota;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public void setNota(Double nota) {
-        this.nota = nota;
-    }
+    public List<String> getPlataformas() { return plataformas; }
+    public void setPlataformas(List<String> plataformas) { this.plataformas = plataformas; }
 
-    public String getImagem() {
-        return imagem;
-    }
+    public List<String> getGeneros() { return generos; }
+    public void setGeneros(List<String> generos) { this.generos = generos; }
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
-
-    public String getDesenvolvedor() {
-        return desenvolvedor;
-    }
-
-    public void setDesenvolvedor(String desenvolvedor) {
-        this.desenvolvedor = desenvolvedor;
-    }
-
-    public String getDescrição() {
-        return descrição;
-    }
-
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
-    }
-
-    public List<String> getPlataformas() {
-        return plataformas;
-    }
-
-    public void setPlataformas(List<String> plataformas) {
-        this.plataformas = plataformas;
-    }
-
-    public List<String> getGeneros() {
-        return generos;
-    }
-
-    public void setGeneros(List<String> generos) {
-        this.generos = generos;
-    }
-
+    // Calcula dinamicamente a quantidade sempre que o atributo for solicitado pela API
     public Long getTotalResenhas() {
-        return totalResenhas;
+        if (this.resenhas == null) {
+            return 0L;
+        }
+        return (long) this.resenhas.size();
     }
 
     public void setTotalResenhas(Long totalResenhas) {
         this.totalResenhas = totalResenhas;
     }
+
+    public List<Resenha> getResenhas() { return resenhas; }
+    public void setResenhas(List<Resenha> resenhas) { this.resenhas = resenhas; }
     
 }

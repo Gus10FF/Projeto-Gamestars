@@ -1,4 +1,4 @@
-package com.stars.game.Mappers;
+package com.stars.game.mappers;
 
 import java.time.LocalDate;
 
