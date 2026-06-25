@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tbl_comentarios")
@@ -13,8 +14,16 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome do usuário do comentário é obrigatório")
-    private String usuario;
+    // --- ALTERAÇÃO: De String para relacionamento com a entidade Usuario ---
+    @NotNull(message = "O usuário do comentário é obrigatório")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id", nullable = false) // Mapeia exatamente a coluna 'usuario_id' do SQL
+    private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resenha_id") 
+    @JsonIgnore // Evita loops infinitos de serialização JSON
+    private Resenha resenha;
 
     @NotBlank(message = "O texto do comentário não pode estar vazio")
     @Size(max = 500, message = "O comentário deve ter no máximo 500 caracteres")
@@ -28,23 +37,20 @@ public class Comentario {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
-
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
     public String getTexto() {
         return texto;
     }
-
     public void setTexto(String texto) {
         this.texto = texto;
     }
@@ -52,9 +58,14 @@ public class Comentario {
     public LocalDate getData() {
         return data;
     }
-
     public void setData(LocalDate data) {
         this.data = data;
+    }
+    public Resenha getResenha() {
+        return resenha;
+    }
+    public void setResenha(Resenha resenha) {
+        this.resenha = resenha;
     }
 
     

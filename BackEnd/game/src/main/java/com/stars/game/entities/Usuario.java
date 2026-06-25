@@ -11,17 +11,19 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome de utilizador (username) é obrigatório")
-    @Size(min = 3, max = 20, message = "O username deve ter entre 3 e 20 caracteres")
-    private String username;
-
     @NotBlank(message = "O e-mail é obrigatório")
     @Email(message = "O e-mail deve ser válido")
     private String email;
 
+    @NotBlank(message = "O nome de utilizador (username) é obrigatório")
+    @Size(min = 3, max = 20, message = "O username deve ter entre 3 e 20 caracteres")
+    private String username;
+
     @NotBlank
     private String tipo;
 
+
+    
     public String getTipo() {
         return tipo;
     }
