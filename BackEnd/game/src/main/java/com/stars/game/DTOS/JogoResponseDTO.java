@@ -12,8 +12,8 @@ public record JogoResponseDTO(
     String descricao,
     List<String> plataformas,
     List<String> generos,
-    Long totalAvaliacoes,
-    List<ResenhaResponseDTO> avaliacoes
+    Long totalResenhas,
+    List<ResenhaResponseDTO> resenhas
 ) {
 
 }

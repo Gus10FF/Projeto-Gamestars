@@ -7,7 +7,7 @@ public record ResenhaResponseDTO(
     Long id,
     UsuarioResponseDTO usuario,
     Integer nota,
-    String texto,
+    String conteudo,
     LocalDate data,
     List<ComentarioResponseDTO> comentarios
 ) {

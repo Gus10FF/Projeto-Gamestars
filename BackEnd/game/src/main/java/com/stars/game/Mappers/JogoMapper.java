@@ -10,6 +10,19 @@ import com.stars.game.entities.*;
 
 @Mapper(componentModel = "spring", imports = {LocalDate.class})
 public interface JogoMapper {
+    default String mapUsuarioToString(Usuario usuario) {
+        return usuario != null ? usuario.getUsername() : null;  // adjust based on your DTO needs
+    }
+    
+    // Handle String to Usuario conversion (DTO → entity)
+    default Usuario mapStringToUsuario(String usuarioNome) {
+        if (usuarioNome == null) {
+            return null;
+        }
+        Usuario usuario = new Usuario();
+        usuario.setUsername(usuarioNome);
+        return usuario;
+    }
 UsuarioResponseDTO toDTO(Usuario usuario);
 
     // --- COMENTARIO ---
@@ -27,19 +40,19 @@ UsuarioResponseDTO toDTO(Usuario usuario);
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "comentarios", ignore = true)
     @Mapping(target = "usuario", source = "usuario")
-    @Mapping(target = "juego", source = "jogo") // mapeia para o atributo 'juego' da entidade
-    @Mapping(target = "texto", source = "dto.texto")
+    @Mapping(target = "jogo", source = "jogo") // mapeia para o atributo 'juego' da entidade
+    @Mapping(target = "conteudo", source = "dto.texto")
     @Mapping(target = "nota", source = "dto.nota")
     @Mapping(target = "data", expression = "java(LocalDate.now())")
     Resenha toEntity(ResenhaRequestDTO dto, Usuario usuario, Jogo jogo);
 
     // --- JOGO ---
-    @Mapping(target = "totalAvaliacoes", source = "jogo.totalAvaliacoes") // chama o método transient automaticamente
+    @Mapping(target = "totalResenhas", source = "jogo.totalResenhas") // chama o método transient automaticamente
     JogoResponseDTO toDTO(Jogo jogo);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "nota", constant = "0.0")
-    @Mapping(target = "totalAvaliacoes", constant = "0L")
-    @Mapping(target = "avaliacoes", ignore = true)
+    @Mapping(target = "totalResenhas", constant = "0L")
+    @Mapping(target = "resenhas", ignore = true)
     Jogo toEntity(JogoRequestDTO dto);
 }

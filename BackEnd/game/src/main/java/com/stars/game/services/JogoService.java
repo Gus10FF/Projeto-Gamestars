@@ -4,7 +4,6 @@ import com.stars.game.DTOS.*;
 import com.stars.game.entities.*;
 import com.stars.game.mappers.JogoMapper;
 import com.stars.game.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,17 +12,20 @@ import java.util.List;
 @Service
 public class JogoService {
 
-    @Autowired
-    private JogoRepository jogoRepository;
+    private final JogoRepository jogoRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private ResenhaRepository resenhaRepository;
+    private final ResenhaRepository resenhaRepository;
 
-    @Autowired
-    private JogoMapper jogoMapper;
+    private final JogoMapper jogoMapper;
+
+    JogoService(JogoMapper jogoMapper, JogoRepository jogoRepository, UsuarioRepository usuarioRepository, ResenhaRepository resenhaRepository) {
+        this.jogoMapper = jogoMapper;
+        this.jogoRepository = jogoRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.resenhaRepository = resenhaRepository;
+    }
 
     // --- CRIAÇÃO DE UM JOGO ---
     @Transactional
