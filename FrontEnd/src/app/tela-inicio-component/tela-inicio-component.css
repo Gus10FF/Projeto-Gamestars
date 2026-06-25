@@ -83,6 +83,44 @@
   color: #b0bac9 !important;
 }
 
+/* --- Paginação --- */
+.btn-paginacao {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  background: #1a1d27;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #c8cfe0;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-paginacao:hover:not(:disabled) {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.5);
+  color: #f0f4ff;
+}
+
+.btn-paginacao.ativo {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-paginacao:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.reticencias {
+  color: #64748b;
+  padding: 0 4px;
+  line-height: 36px;
+}
+
 /* --- Badge de preço (visível ao ordenar por "Mais em conta") --- */
 .preco-badge {
   display: inline-block;

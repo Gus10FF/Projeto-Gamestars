@@ -1,46 +1,6 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JogoService } from '../services/jogo-service';
-
-interface Comentario {
-  usuario: string;
-  texto: string;
-  data: string;
-}
-
-interface Avaliacao {
-  usuario: string;
-  nota: number;
-  texto: string;
-  data: string;
-  comentarios: Comentario[];
-}
-
-interface Preco {
-  nome: string;
-  logo: string;
-  preco: string;
-  precoOriginal?: string;
-  desconto?: number;
-  link: string;
-  melhorPreco: boolean;
-}
-
-interface Jogo {
-  id: number;
-  nome: string;
-  ano: number;
-  nota: number;
-  imagem: string;
-  desenvolvedor: string;
-  descricao: string;
-  plataformas: string[];
-  generos: string[];
-  totalAvaliacoes: number;
-  avaliacoes: Avaliacao[];
-  precos: Preco[];
-}
 
 @Component({
   selector: 'app-pagina-jogo-component',
@@ -50,9 +10,9 @@ interface Jogo {
 })
 export class PaginaJogoComponent implements OnInit {
 
-  jogoSelecionado: any;
+  jogo: any;
   barrasNota: { estrelas: number; percentual: number }[] = [];
-  jogosSimilares: any;
+  jogosSimilares: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -61,25 +21,20 @@ export class PaginaJogoComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      // Usa o método do serviço para buscar o jogo
-      this.jogoSelecionado = this.jService.getJogoPorId(Number(id));
-      if (this.jogoSelecionado) {
-         this.calcularBarrasNota(this.jogoSelecionado.avaliacoes);
-      // Passa o array de gêneros (this.jogoSelecionado.generos)
-      this.jogosSimilares = this.jService.getJogosPorGeneros(
-        this.jogoSelecionado.generos, // Note o 's' se mudou o nome da propriedade para generos
-        id
-      );
+    this.jogo = this.jService.getJogoPorId(id);
 
-      }
+    if (this.jogo) {
+      this.calcularBarrasNota(this.jogo.resenhas);
+      this.jogosSimilares = this.jService
+        .getJogosPorGeneros(this.jogo.generos, this.jogo.id)
+        .slice(0, 4);
     }
   }
 
-  private calcularBarrasNota(avaliacoes: Avaliacao[]): void {
-    const total = avaliacoes.length || 1;
+  private calcularBarrasNota(resenhas: any[]): void {
+    const total = resenhas?.length || 1;
     this.barrasNota = [5, 4, 3, 2, 1].map(estrelas => {
-      const count = avaliacoes.filter(a => Math.round(a.nota) === estrelas).length;
+      const count = resenhas?.filter(r => Math.round(r.nota) === estrelas).length ?? 0;
       return { estrelas, percentual: Math.round((count / total) * 100) };
     });
   }
