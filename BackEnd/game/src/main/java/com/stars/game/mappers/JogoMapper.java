@@ -31,6 +31,7 @@ UsuarioResponseDTO toDTO(Usuario usuario);
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "usuario", source = "usuario")
     @Mapping(target = "texto", source = "dto.texto")
+    @Mapping(target = "resenha", ignore = true)  // Add this line
     @Mapping(target = "data", expression = "java(LocalDate.now())")
     Comentario toEntity(ComentarioRequestDTO dto, Usuario usuario);
 
