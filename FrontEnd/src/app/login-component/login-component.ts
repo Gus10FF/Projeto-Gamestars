@@ -31,9 +31,12 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       console.log('Login:', this.loginForm.value);
       // TODO: integrar com AuthService
+      this.router.navigate(['/home']);
     } else {
       this.loginForm.markAllAsTouched();
     }
+
+
   }
 
   irParaCadastro(): void {
