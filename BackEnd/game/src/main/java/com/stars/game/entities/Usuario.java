@@ -19,6 +19,10 @@ public class Usuario {
     @Size(min = 3, max = 20, message = "O username deve ter entre 3 e 20 caracteres")
     private String username;
 
+    @NotBlank(message = "A senha é obrigatória")
+    @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
+    private String password;
+
     @NotBlank
     private String tipo;
 
@@ -56,5 +60,11 @@ public class Usuario {
         this.email = email;
     }
 
-    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

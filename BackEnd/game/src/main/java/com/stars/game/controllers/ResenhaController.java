@@ -30,4 +30,14 @@ public class ResenhaController {
 
         return ResponseEntity.ok(resenha);
     }
+
+    @DeleteMapping("/{id}")
+public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    if (!resenhaRepository.existsById(id)) {
+        return ResponseEntity.notFound().build();
+    }
+    resenhaRepository.deleteById(id);
+    return ResponseEntity.noContent().build();
+}
+
 }
