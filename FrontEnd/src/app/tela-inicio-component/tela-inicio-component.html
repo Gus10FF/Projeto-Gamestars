@@ -12,9 +12,12 @@
               [(ngModel)]="plataformaSelecionada"
               (ngModelChange)="onPlataformaChange($event)">
               <option>Todas</option>
-              <option>PC</option>
-              <option>PS5</option>
-              <option>Xbox</option>
+              <option>PC (Windows)</option>
+              <option>PlayStation 4</option>
+              <option>PlayStation 5</option>
+              <option>Xbox One</option>
+              <option>Xbox Series X/S</option>
+              <option>Nintendo Switch</option>
             </select>
           </div>
 
@@ -31,15 +34,21 @@
           </div>
 
         </div>
+
+        <!-- Contador de resultados -->
+        <span class="text-muted small">
+          {{ jogosFiltrados.length }} jogo{{ jogosFiltrados.length !== 1 ? 's' : '' }} encontrado{{ jogosFiltrados.length !== 1 ? 's' : '' }}
+        </span>
       </div>
 
       <!-- Mensagem quando nenhum jogo bate o filtro -->
-      <p *ngIf="meusJogos.length === 0" class="text-muted">
-        Nenhum jogo encontrado para a plataforma selecionada.
+      <p *ngIf="jogosFiltrados.length === 0" class="text-muted">
+        Nenhum jogo encontrado para os filtros selecionados.
       </p>
 
+      <!-- Grade de jogos (página atual) -->
       <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3">
-        <div class="col" *ngFor="let jogo of meusJogos">
+        <div class="col" *ngFor="let jogo of jogosPagina">
           <button type="button"
             class="card game-card h-100 border-0 position-relative text-start bg-transparent p-0 w-100"
             [routerLink]="['/jogos', jogo.id]">
@@ -63,7 +72,7 @@
                   </ngb-rating>
                 </div>
                 <div *ngIf="ordenacaoSelecionada === 'Mais em conta'" class="preco-badge">
-                  {{ jogo.menorPreco === 0 ? 'Grátis' : 'R$ ' + jogo.menorPreco.toFixed(2) }}
+                  {{ getMenorPrecoTexto(jogo) }}
                 </div>
               </div>
             </div>
@@ -71,20 +80,61 @@
           </button>
         </div>
       </div>
+
+      <!-- Paginação -->
+      <nav *ngIf="totalPaginas > 1" class="mt-4 d-flex justify-content-center align-items-center gap-1">
+
+        <!-- Anterior -->
+        <button class="btn btn-paginacao"
+          [disabled]="paginaAtual === 1"
+          (click)="irParaPagina(paginaAtual - 1)">
+          ‹
+        </button>
+
+        <!-- Números de página -->
+        <ng-container *ngFor="let p of paginas">
+          <!-- Reticências antes do bloco do meio -->
+          <span *ngIf="p === paginaAtual - 2 && paginaAtual > 4" class="reticencias">…</span>
+
+          <!-- Exibe: primeira, última, e as 2 vizinhas da atual -->
+          <button *ngIf="p === 1 || p === totalPaginas || (p >= paginaAtual - 1 && p <= paginaAtual + 1)"
+            class="btn btn-paginacao"
+            [class.ativo]="p === paginaAtual"
+            (click)="irParaPagina(p)">
+            {{ p }}
+          </button>
+
+          <!-- Reticências depois do bloco do meio -->
+          <span *ngIf="p === paginaAtual + 2 && paginaAtual < totalPaginas - 3" class="reticencias">…</span>
+        </ng-container>
+
+        <!-- Próxima -->
+        <button class="btn btn-paginacao"
+          [disabled]="paginaAtual === totalPaginas"
+          (click)="irParaPagina(paginaAtual + 1)">
+          ›
+        </button>
+
+      </nav>
+
+      <!-- Info de página -->
+      <p *ngIf="totalPaginas > 1" class="text-center text-muted small mt-2">
+        Página {{ paginaAtual }} de {{ totalPaginas }}
+      </p>
+
     </main>
 
     <aside class="col-lg-3">
       <div class="sidebar-section p-3 rounded">
         <h5 class="text-white mb-3 fw-bold tracking-wide text-uppercase small" style="letter-spacing: 1px;">
-          Lançados Reecentemente
+          Lançados Recentemente
         </h5>
         <div class="d-flex flex-column gap-3">
           <div class="d-flex align-items-center justify-content-between sidebar-item"
                *ngFor="let pop of jogosPopulares">
             <div class="d-flex align-items-center gap-2"
-            style="cursor:pointer"
-            [routerLink]="['/jogos', pop.id]"
-            >
+                 style="cursor:pointer"
+                 [routerLink]="['/jogos', pop.id]">
               <img [src]="pop.imagem" class="rounded" [alt]="pop.nome"
                    style="width: 40px; height: 50px; object-fit: cover;">
               <div>
