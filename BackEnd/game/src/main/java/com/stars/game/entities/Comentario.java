@@ -21,7 +21,7 @@ public class Comentario {
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resenha_id") 
+    @JoinColumn(name = "resenha_id") // Mapeia a coluna 'avaliacao_id' usada no data.sql
     @JsonIgnore // Evita loops infinitos de serialização JSON
     private Resenha resenha;
 
@@ -48,6 +48,13 @@ public class Comentario {
         this.usuario = usuario;
     }
 
+    public Resenha getResenha() {
+        return resenha;
+    }
+    public void setResenha(Resenha resenha) {
+        this.resenha = resenha;
+    }
+
     public String getTexto() {
         return texto;
     }
@@ -60,12 +67,6 @@ public class Comentario {
     }
     public void setData(LocalDate data) {
         this.data = data;
-    }
-    public Resenha getResenha() {
-        return resenha;
-    }
-    public void setResenha(Resenha resenha) {
-        this.resenha = resenha;
     }
 
     
