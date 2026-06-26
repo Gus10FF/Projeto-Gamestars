@@ -35,6 +35,12 @@ public class JogoService {
         return jogoMapper.toDTO(jogo);
     }
 
+    public List<JogoResponseDTO> listarTodos() {
+    // Busca os jogos do banco e mapeia/converte para JogoResponseDTO
+        return jogoRepository.findAll().stream()
+                .map(jogo -> jogoMapper.toDTO(jogo)) // Ou a sua lógica de conversão
+                .toList();
+    }
     // --- BUSCA DE JOGO POR ID ---
     @Transactional(readOnly = true)
     public JogoResponseDTO buscarPorId(Long id) {

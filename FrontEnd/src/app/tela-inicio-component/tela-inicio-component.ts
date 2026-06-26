@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { JogoService } from '../services/jogo-service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { JogoService, Jogo } from '../services/jogo-service'; // Importando a interface Jogo do seu service
 
 @Component({
   selector: 'app-tela-inicio-component',
@@ -9,50 +9,66 @@ import { JogoService } from '../services/jogo-service';
 })
 export class TelaInicioComponent implements OnInit {
 
-  todosJogos: any[] = [];
-  jogosFiltrados: any[] = [];  // resultado após filtro+ordenação (lista completa)
-  jogosPagina: any[] = [];     // fatia exibida na página atual
-  jogosPopulares: any[] = [];
+  todosJogos: Jogo[] = [];
+  jogosFiltrados: Jogo[] = [];  // resultado após filtro+ordenação
+  jogosPagina: Jogo[] = [];     // fatia exibida na página atual
+  jogosPopulares: Jogo[] = [];
 
   plataformaSelecionada = 'Todas';
   ordenacaoSelecionada  = 'Mais bem avaliados';
 
   // Paginação
-  readonly itensPorPagina = 12; // 6 colunas × 2 fileiras
+  readonly itensPorPagina = 12;
   paginaAtual = 1;
   totalPaginas = 1;
   paginas: number[] = [];
 
-  constructor(private jService: JogoService) {}
+  constructor(private jService: JogoService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.todosJogos = this.jService.getJogos();
-    this.aplicarFiltros();
-    this.jogosPopulares = this.obterMaisRecentes(this.todosJogos);
+    // Busca todos os jogos do backend Spring Boot
+    this.jService.getJogos().subscribe({
+      next: (jogos: Jogo[]) => {
+        this.todosJogos = jogos;
+
+        // Aplica os filtros e monta a sidebar de populares apenas após os dados chegarem
+        this.aplicarFiltros();
+        this.jogosPopulares = this.obterMaisRecentes(this.todosJogos);
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Erro ao buscar jogos para a tela inicial:', err);
+      }
+    });
   }
 
   // --- Preços ---
 
   private precoParaNumero(preco: string): number {
     if (!preco || preco.toLowerCase() === 'grátis' || preco === '0') return 0;
-    return parseFloat(preco.replace(',', '.'));
+    // Remove R$, espaços e ajusta os pontos/vírgulas decimais
+    const limpo = preco.replace('R$', '').replace(/\s/g, '').replace(',', '.');
+    return parseFloat(limpo);
   }
 
-  private calcularMenorPreco(jogo: any): number {
-    if (!jogo.precos || jogo.precos.length === 0) return Infinity;
-    const numeros = jogo.precos.map((p: any) => this.precoParaNumero(p.preco));
-    return Math.min(...numeros);
-  }
+  private calcularMenorPreco(jogo: Jogo): number {
+  // Se jogo.precos não existir, for nulo ou estiver vazio, retorna Infinity com segurança
+  if (!jogo || !jogo.precos || jogo.precos.length === 0) return Infinity;
 
-  getMenorPrecoTexto(jogo: any): string {
-    const valor = this.calcularMenorPreco(jogo);
-    if (valor === 0) return 'Grátis';
-    return 'R$ ' + valor.toFixed(2).replace('.', ',');
-  }
+  const numeros = jogo.precos.map((p: any) => this.precoParaNumero(p.preco));
+  return Math.min(...numeros);
+}
+
+getMenorPrecoTexto(jogo: Jogo): string {
+  const valor = this.calcularMenorPreco(jogo);
+  if (valor === Infinity) return 'N/A'; // 👈 Retorna 'N/A' ou 'Sem preço' se não houver dados
+  if (valor === 0) return 'Grátis';
+  return 'R$ ' + valor.toFixed(2).replace('.', ',');
+}
 
   // --- Sidebar ---
 
-  obterMaisRecentes(lista: any[]): any[] {
+  obterMaisRecentes(lista: Jogo[]): Jogo[] {
     return [...lista].sort((a, b) => b.ano - a.ano).slice(0, 10);
   }
 

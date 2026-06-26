@@ -3,13 +3,13 @@
   <!-- Hero Banner -->
   <div class="hero-banner position-relative">
     <div class="hero-overlay"></div>
-    <img [src]="jogo.imagem" [alt]="jogo.nome" class="hero-bg-img">
+    <img [src]="jogo.imagem" [alt]="jogo.name" class="hero-bg-img">
     <div class="hero-content container-fluid px-4 py-4 position-relative">
       <div class="row g-4 align-items-end">
 
         <!-- Capa do Jogo -->
         <div class="col-auto">
-          <img [src]="jogo.imagem" [alt]="jogo.nome" class="game-cover shadow">
+          <img [src]="jogo.imagem" [alt]="jogo.name" class="game-cover shadow">
         </div>
 
         <!-- Informações Principais -->
@@ -17,7 +17,7 @@
           <div class="d-flex align-items-center gap-2 mb-1">
             <span class="badge badge-platform" *ngFor="let plataforma of jogo.plataformas">{{ plataforma }}</span>
           </div>
-          <h1 class="game-title mb-1">{{ jogo.nome }}</h1>
+          <h1 class="game-title mb-1">{{ jogo.name }}</h1>
           <p class="game-developer text-muted mb-2">{{ jogo.desenvolvedor }} · {{ jogo.ano }}</p>
           <div class="d-flex align-items-center gap-3 flex-wrap">
             <div class="d-flex align-items-center gap-2">
@@ -105,9 +105,9 @@
           <div class="avaliacao-item mb-3" *ngFor="let avaliacao of jogo.resenhas">
             <div class="d-flex justify-content-between align-items-start mb-1">
               <div class="d-flex align-items-center gap-2">
-                <div class="avatar-circle">{{ avaliacao.usuario.charAt(0).toUpperCase() }}</div>
+                <div class="avatar-circle">{{ avaliacao.usuario.username.charAt(0).toUpperCase() }}</div>
                 <div>
-                  <span class="fw-semibold text-white">{{ avaliacao.usuario }}</span>
+                  <span class="fw-semibold text-white">{{ avaliacao.usuario.username }}</span>
                   <div class="d-flex align-items-center gap-1 mt-0">
                     <ngb-rating [max]="5" [(rate)]="avaliacao.nota" [readonly]="true">
                       <ng-template let-fill="fill">
@@ -129,8 +129,8 @@
             <div class="comentarios-avaliacao ps-5" *ngIf="avaliacao.comentarios && avaliacao.comentarios.length > 0">
               <div class="comentario-item mb-2 p-2 rounded" *ngFor="let comentario of avaliacao.comentarios">
                 <div class="d-flex gap-2 align-items-center mb-1">
-                  <div class="avatar-circle avatar-sm">{{ comentario.usuario.charAt(0).toUpperCase() }}</div>
-                  <span class="fw-semibold text-white small">{{ comentario.usuario }}</span>
+                  <div class="avatar-circle avatar-sm">{{ comentario.usuario.username.charAt(0).toUpperCase() }}</div>
+                  <span class="fw-semibold text-white small">{{ comentario.usuario.username }}</span>
                   <span class="text-muted" style="font-size:0.7rem">{{ comentario.data }}</span>
                 </div>
                 <p class="text-muted mb-0 small ps-4">{{ comentario.texto }}</p>
@@ -177,9 +177,9 @@
             <button class="btn p-0 text-start bg-transparent border-0 similar-item d-flex align-items-center gap-2"
                     *ngFor="let similar of jogosSimilares"
                     [routerLink]="['/jogos', similar.id]">
-              <img [src]="similar.imagem" [alt]="similar.nome" class="similar-cover rounded">
+              <img [src]="similar.imagem" [alt]="similar.name" class="similar-cover rounded">
               <div>
-                <h6 class="text-white mb-0 small">{{ similar.nome }}</h6>
+                <h6 class="text-white mb-0 small">{{ similar.name }}</h6>
                 <span class="text-success small">⭐ {{ similar.nota }}</span>
               </div>
             </button>

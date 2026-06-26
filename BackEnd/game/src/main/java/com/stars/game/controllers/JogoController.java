@@ -9,17 +9,25 @@ import com.stars.game.services.JogoService;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/jogos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class JogoController {
 
     private final JogoService jogoService;
 
     public JogoController(JogoService jogoService) {
         this.jogoService = jogoService;
+    }
+
+    @GetMapping
+        public ResponseEntity<List<JogoResponseDTO>> listarTodos() {
+        return ResponseEntity.ok(jogoService.listarTodos()); // Garanta que esse método existe no seu Service
     }
 
     @PostMapping
