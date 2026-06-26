@@ -23,16 +23,17 @@ public class Resenha {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    private Long nota;
-
-    private String conteudo;
-
-    private LocalDate data;
     @NotNull(message = "O jogo associado é obrigatório")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jogo_id", nullable = false) // Cria a FK jogo_id no banco de dados
     @JsonIgnore // Evita loops infinitos de leitura quando converter para JSON
     private Jogo jogo;
+
+    private Long nota;
+
+    private String conteudo;
+
+    private LocalDate data;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "resenha_id")
