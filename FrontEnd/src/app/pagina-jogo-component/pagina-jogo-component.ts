@@ -20,7 +20,9 @@ export class PaginaJogoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+  this.route.paramMap.subscribe(params => {
+    const id = Number(params.get('id'));
+
     this.jogo = this.jService.getJogoPorId(id);
 
     if (this.jogo) {
@@ -29,7 +31,8 @@ export class PaginaJogoComponent implements OnInit {
         .getJogosPorGeneros(this.jogo.generos, this.jogo.id)
         .slice(0, 4);
     }
-  }
+  });
+}
 
   private calcularBarrasNota(resenhas: any[]): void {
     const total = resenhas?.length || 1;
