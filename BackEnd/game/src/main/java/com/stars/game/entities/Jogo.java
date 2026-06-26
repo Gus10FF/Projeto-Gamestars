@@ -55,7 +55,18 @@ public Jogo() {}
     public Integer getAno() { return ano; }
     public void setAno(Integer ano) { this.ano = ano; }
 
-    public Double getNota() { return nota; }
+    public Double getNota() { 
+        if (resenhas == null || resenhas.isEmpty()) {
+            return 0.0;
+        }
+
+        double soma = resenhas.stream()
+                .mapToDouble(Resenha::getNota) // se o Resenha DTO ainda for classe antiga
+                .sum();
+
+        double media = soma / resenhas.size();
+        return Math.round(media * 10.0) / 10.0;
+    }
     public void setNota(Double nota) { this.nota = nota; }
 
     public String getImagem() { return imagem; }

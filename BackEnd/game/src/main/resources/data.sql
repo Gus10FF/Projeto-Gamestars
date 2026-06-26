@@ -107,26 +107,26 @@ INSERT INTO tbl_usuarios (id, username, email, password, tipo) VALUES
 (99, 'rafael_elite', 'rafael.elite@email.com', '123456', 'usuario'),
 (100, 'sofia_legend', 'sofia.legend@email.com', '123456', 'usuario');
 
-INSERT INTO tbl_jogos (id, name, ano, nota, imagem, desenvolvedor, descricao) VALUES
-(1, 'Ultrakill', 2019, 4.9, 'jogos/Ultrakill.jpeg', 'Arsi ''Hakita'' Patala', 'FPS retrô frenético que combina movimentação avançada, combate estiloso e pontuação inspirada em jogos de ação.'),
+INSERT INTO tbl_jogos (id, name, ano, imagem, desenvolvedor, descricao) VALUES
+(1, 'Ultrakill', 2019, 'jogos/Ultrakill.jpeg', 'Arsi ''Hakita'' Patala', 'FPS retrô frenético que combina movimentação avançada, combate estiloso e pontuação inspirada em jogos de ação.'),
 
-(2, 'Enter The Gungeon', 2016, 4.8, 'jogos/Enter the Gungeon.jpeg', 'Dodge Roll', 'Roguelike de ação focado em tiroteios intensos, armas absurdas e exploração de masmorras geradas proceduralmente.'),
+(2, 'Enter The Gungeon', 2016, 'jogos/Enter the Gungeon.jpeg', 'Dodge Roll', 'Roguelike de ação focado em tiroteios intensos, armas absurdas e exploração de masmorras geradas proceduralmente.'),
 
-(3, 'Iron Lung', 2022, 4.7, 'jogos/Iron Lung.jpeg', 'David Szymanski', 'Jogo de terror psicológico ambientado em um submarino explorando um oceano de sangue em um planeta desconhecido.'),
+(3, 'Iron Lung', 2022, 'jogos/Iron Lung.jpeg', 'David Szymanski', 'Jogo de terror psicológico ambientado em um submarino explorando um oceano de sangue em um planeta desconhecido.'),
 
-(4, 'DeltaRune', 2018, 4.9, 'jogos/Deltarune.jpeg', 'Toby Fox', 'RPG episódico ambientado em um universo paralelo a Undertale, com personagens marcantes e combate único.'),
+(4, 'DeltaRune', 2018, 'jogos/Deltarune.jpeg', 'Toby Fox', 'RPG episódico ambientado em um universo paralelo a Undertale, com personagens marcantes e combate único.'),
 
-(5, 'Mullet Madjack', 2024, 4.9, 'jogos/Mullet Madjack.jpeg', 'HAMMER95 Studios', 'FPS brasileiro extremamente veloz inspirado em animes dos anos 80 e jogos arcade.'),
+(5, 'Mullet Madjack', 2024, 'jogos/Mullet Madjack.jpeg', 'HAMMER95 Studios', 'FPS brasileiro extremamente veloz inspirado em animes dos anos 80 e jogos arcade.'),
 
-(6, 'Dust: An Elysian Tail', 2012, 4.5, 'jogos/Dust.jpeg', 'Dean Dodrill', 'Metroidvania com visual desenhado à mão, combate fluido e narrativa emocionante.'),
+(6, 'Dust: An Elysian Tail', 2012, 'jogos/Dust.jpeg', 'Dean Dodrill', 'Metroidvania com visual desenhado à mão, combate fluido e narrativa emocionante.'),
 
-(7, 'Uktena 64', 2025, 4.5, 'jogos/Uktena 64.jpeg', 'SeethingSwarm', 'Jogo de terror inspirado na estética do Nintendo 64 com foco em exploração e atmosfera.'),
+(7, 'Uktena 64', 2025, 'jogos/Uktena 64.jpeg', 'SeethingSwarm', 'Jogo de terror inspirado na estética do Nintendo 64 com foco em exploração e atmosfera.'),
 
-(8, 'Hotline Miami', 2012, 4.7, 'jogos/HM.jpeg', 'Dennaton Games', 'Jogo de ação ultraviolento com perspectiva superior, ritmo acelerado e trilha sonora eletrônica marcante.'),
+(8, 'Hotline Miami', 2012, 'jogos/HM.jpeg', 'Dennaton Games', 'Jogo de ação ultraviolento com perspectiva superior, ritmo acelerado e trilha sonora eletrônica marcante.'),
 
-(9, 'Gravity Circuit', 2023, 4.6, 'jogos/Gravity Circuit.jpg', 'Domesticated Ant Games', 'Plataforma de ação inspirado em clássicos dos anos 90 com foco em combate corpo a corpo.'),
+(9, 'Gravity Circuit', 2023, 'jogos/Gravity Circuit.jpg', 'Domesticated Ant Games', 'Plataforma de ação inspirado em clássicos dos anos 90 com foco em combate corpo a corpo.'),
 
-(10, 'Balatro', 2024, 4.2, 'jogos/balatro.jpeg', 'LocalThunk', 'Roguelike de construção de baralhos baseado em pôquer, combinando estratégia e multiplicadores absurdos.');
+(10, 'Balatro', 2024, 'jogos/balatro.jpeg', 'LocalThunk', 'Roguelike de construção de baralhos baseado em pôquer, combinando estratégia e multiplicadores absurdos.');
 
 INSERT INTO tbl_jogos (id, name, ano, nota, imagem, desenvolvedor, descricao) VALUES
 (11, 'BALL X PIT', 2025, 4.5, 'jogos/Ball x pit.jpeg', 'Kenny Sun', 'Roguelike de ação que mistura mecânicas de breakout, construção de base e progressão permanente em partidas rápidas.'),
