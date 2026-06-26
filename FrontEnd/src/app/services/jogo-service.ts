@@ -12,7 +12,7 @@ export interface Comentario {
 export interface Resenha {
   usuario: { id: number; username: string; email?: string };
   nota: number;
-  texto: string;
+  conteudo: string;
   data: string;
   comentarios: Comentario[];
 }
@@ -83,5 +83,8 @@ export class JogoService {
       if (jogo.id === idAtual) return false;
       return jogo.generos.some(genero => generosDoJogoAtual.includes(genero));
     });
+  }
+  adicionarResenha(jogoId: number, resenha: { usuarioId: number; nota: number; texto: string }): Observable<Jogo> {
+    return this.http.post<Jogo>(`${this.apiUrl}/${jogoId}/resenhas`, resenha);
   }
 }

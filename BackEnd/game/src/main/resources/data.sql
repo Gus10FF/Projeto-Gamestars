@@ -653,6 +653,7 @@ INSERT INTO tbl_comentarios (id, usuario_id, resenha_id, texto, data) VALUES
 (127, 24, 41, 'Undertale continua sendo uma experiência única.', '2025-07-31'),
 (128, 88, 41, 'Os personagens são impossíveis de esquecer.', '2025-07-31');
 
+ALTER TABLE tbl_resenhas ALTER COLUMN id RESTART WITH 128;
 INSERT INTO tbl_precos
 (nome, logo, preco, preco_original, desconto, link, melhor_preco, jogo_id)
 VALUES

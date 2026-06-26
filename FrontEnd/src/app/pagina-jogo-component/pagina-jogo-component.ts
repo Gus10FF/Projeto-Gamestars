@@ -78,4 +78,46 @@ export class PaginaJogoComponent implements OnInit {
       return { estrelas, percentual: Math.round((count / total) * 100) };
     });
   }
+
+  // Altere o objeto para conter as propriedades exatas que seu ResenhaRequestDTO espera
+novaResenha = {
+  usuarioId: 1, // Exemplo: Mockando com o ID de um usuário cadastrado no banco (ex: 1)
+  nota: 5,
+  texto: ''
+};
+
+enviarResenha(): void {
+  if (!this.jogo) return;
+
+  if (!this.novaResenha.texto.trim()) {
+    alert('Por favor, escreva o texto da resenha!');
+    return;
+  }
+
+  // Payload formatado exatamente como o record Java quer receber
+  const payload = {
+    usuarioId: Number(this.novaResenha.usuarioId), // ou apenas o número direto
+    nota: Number(this.novaResenha.nota),
+    texto: this.novaResenha.texto.trim()
+  };
+
+  console.log("Enviando este payload para o backend:", payload);
+
+  this.jService.adicionarResenha(this.jogo.id, payload).subscribe({
+    next: (jogoAtualizado: Jogo) => {
+      this.jogo = jogoAtualizado;
+      this.calcularBarrasNota(this.jogo.resenhas);
+
+      // Reseta os campos mantendo o usuarioId padrão de teste
+      this.novaResenha = { usuarioId: 1, nota: 5, texto: '' };
+
+      this.cdr.detectChanges();
+      alert('Resenha adicionada com sucesso!');
+    },
+    error: (err) => {
+      console.error('Erro detalhado do Spring:', err.error);
+      alert('Erro ao salvar resenha. Verifique os logs do servidor.');
+    }
+  });
+}
 }
