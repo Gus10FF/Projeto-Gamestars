@@ -153,7 +153,9 @@
           <div class="d-flex flex-column gap-2">
             <a [href]="loja.link" target="_blank" class="preco-card d-flex align-items-center justify-content-between p-3 rounded text-decoration-none"
                *ngFor="let loja of jogo.precos"
+               rel="noopener noreferrer"
                [class.melhor-preco]="loja.melhorPreco">
+
               <div class="d-flex align-items-center gap-2">
                 <img [src]="loja.logo" [alt]="loja.nome" class="loja-logo">
                 <span class="loja-nome text-white">{{ loja.nome }}</span>

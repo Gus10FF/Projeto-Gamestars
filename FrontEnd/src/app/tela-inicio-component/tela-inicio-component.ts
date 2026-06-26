@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { JogoService, Jogo } from '../services/jogo-service'; // Importando a interface Jogo do seu service
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tela-inicio-component',
@@ -16,12 +17,15 @@ export class TelaInicioComponent implements OnInit {
 
   plataformaSelecionada = 'Todas';
   ordenacaoSelecionada  = 'Mais bem avaliados';
+  termoBuscaActual = ''; // Nova variável para guardar o texto digitado na navbar
 
   // Paginação
   readonly itensPorPagina = 12;
   paginaAtual = 1;
   totalPaginas = 1;
   paginas: number[] = [];
+
+  private buscaSub!: Subscription;
 
   constructor(private jService: JogoService, private cdr: ChangeDetectorRef) {}
 
@@ -31,8 +35,15 @@ export class TelaInicioComponent implements OnInit {
       next: (jogos: Jogo[]) => {
         this.todosJogos = jogos;
 
+        // 2. Fica escutando a barra de pesquisa em tempo real
+        this.buscaSub = this.jService.termoBusca$.subscribe({
+          next: (termo: string) => {
+            this.termoBuscaActual = termo;
+            this.aplicarFiltros(); // Re-aplica tudo (busca + plataforma + ordenação)
+            this.cdr.detectChanges();
+          }
+        });
         // Aplica os filtros e monta a sidebar de populares apenas após os dados chegarem
-        this.aplicarFiltros();
         this.jogosPopulares = this.obterMaisRecentes(this.todosJogos);
         this.cdr.detectChanges();
       },
@@ -78,6 +89,12 @@ getMenorPrecoTexto(jogo: Jogo): string {
     let resultado = this.plataformaSelecionada === 'Todas'
       ? [...this.todosJogos]
       : this.todosJogos.filter(j => j.plataformas.includes(this.plataformaSelecionada));
+
+      if (this.termoBuscaActual && this.termoBuscaActual.trim() !== '') {
+      resultado = resultado.filter(j =>
+        j.name.toLowerCase().includes(this.termoBuscaActual.toLowerCase())
+      );
+    }
 
     switch (this.ordenacaoSelecionada) {
       case 'Mais bem avaliados':

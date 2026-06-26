@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar px-4">
   <div class="container-fluid gap-4">
-    <a class="navbar-brand d-flex align-items-center" href="#">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
       <img src="Logo2.0.jpeg" alt="GameStars Logo" class="navbar-logo">
     </a>
 
@@ -9,8 +9,31 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <form class="d-flex me-3 position-relative search-box w-50" role="search">
-        <input class="form-control bg-dark text-white border-secondary ps-4" type="search" placeholder="Buscar jogos...">
+
+      <form class="d-flex me-3 position-relative search-box w-50" role="search" (submit)="$event.preventDefault()">
+        <input
+          class="form-control bg-dark text-white border-secondary ps-4"
+          type="search"
+          placeholder="Buscar jogos..."
+          name="search"
+          autocomplete="off"
+          [(ngModel)]="termo"
+          (input)="aoDigitar()"
+          (blur)="limparSugesoes()"> <ul class="list-group position-absolute w-100 start-0 mt-1 shadow-lg"
+            style="top: 100%; z-index: 1050; max-height: 250px; overflow-y: auto;"
+            *ngIf="sugestoes.length > 0">
+
+          <li class="list-group-item list-group-item-action bg-dark text-white border-secondary d-flex align-items-center gap-2"
+              style="cursor: pointer;"
+              *ngFor="let jogo of sugestoes"
+              (mousedown)="selecionarSugestao(jogo.name)"> <img [src]="jogo.imagem" alt="Capa" style="width: 30px; height: 40px; object-fit: cover; border-radius: 4px;">
+            <div>
+              <div class="fw-bold text-truncate" style="max-width: 300px;">{{ jogo.name }}</div>
+              <small class="text-muted">{{ jogo.ano }}</small>
+            </div>
+          </li>
+
+        </ul>
       </form>
 
       <div class="d-flex align-items-center gap-2 ms-auto">

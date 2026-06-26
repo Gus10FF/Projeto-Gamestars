@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 export interface Comentario {
   id?: number;
@@ -49,8 +49,14 @@ export class JogoService {
 
   private apiUrl = 'http://localhost:8080/jogos';
 
+  private termoBuscaSubject = new BehaviorSubject<string>('');
+  termoBusca$ = this.termoBuscaSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
+  atualizarTermoBusca(termo: string): void {
+    this.termoBuscaSubject.next(termo);
+  }
 
   getJogos(): Observable<Jogo[]> {
   return this.http.get<Jogo[]>(this.apiUrl).pipe(
