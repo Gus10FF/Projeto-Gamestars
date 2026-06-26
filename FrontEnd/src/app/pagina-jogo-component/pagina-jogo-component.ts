@@ -41,8 +41,7 @@ export class PaginaJogoComponent implements OnInit {
 
         console.log('========== JOGO RECEBIDO ==========');
       console.log(jogoBuscado);
-      console.log(JSON.stringify(jogoBuscado, null, 2));
-      console.log('===================================');
+
 
         // Só executa as lógicas visuais e de recomendação após o jogo chegar do backend
         this.calcularBarrasNota(this.jogo.resenhas);

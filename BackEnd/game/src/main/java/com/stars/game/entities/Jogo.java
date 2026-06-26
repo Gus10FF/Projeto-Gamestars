@@ -2,6 +2,7 @@ package com.stars.game.entities;
 
 import java.util.List;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -38,6 +39,9 @@ public class Jogo{
     @CollectionTable(name = "tbl_jogo_generos", joinColumns = @JoinColumn(name = "jogo_id"))
     private List<String> generos;
 
+    @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Preco> precos;
+
     @Transient
     private Long totalResenhas;
 
@@ -67,6 +71,15 @@ public Jogo() {}
         double media = soma / resenhas.size();
         return Math.round(media * 10.0) / 10.0;
     }
+
+    public List<Preco> getPrecos() {
+    return precos;
+}
+
+public void setPrecos(List<Preco> precos) {
+    this.precos = precos;
+}
+
     public void setNota(Double nota) { this.nota = nota; }
 
     public String getImagem() { return imagem; }

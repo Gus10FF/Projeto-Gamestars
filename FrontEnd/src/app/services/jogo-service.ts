@@ -57,7 +57,7 @@ export class JogoService {
     map(jogos => jogos.map(jogo => ({
       ...jogo,
       resenhas: jogo.resenhas || [], // evita que venha undefined
-      precos: []      // evita que quebre por falta de dados no H2
+      precos: jogo.precos || []     // evita que quebre por falta de dados no H2
     })))
   );
 }
@@ -67,7 +67,7 @@ export class JogoService {
     map(jogo => ({
       ...jogo,
       resenhas: jogo.resenhas || [],
-      precos: []
+      precos: jogo.precos || []
     }))
   );
 }

@@ -13,7 +13,8 @@ public record JogoResponseDTO(
     List<String> plataformas,
     List<String> generos,
     Long totalResenhas,
-    List<ResenhaResponseDTO> resenhas
+    List<ResenhaResponseDTO> resenhas,
+    List<PrecoResponseDTO> precos
 ) {
 
 }

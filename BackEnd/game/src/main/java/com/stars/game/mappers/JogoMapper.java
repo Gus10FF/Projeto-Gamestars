@@ -55,5 +55,13 @@ UsuarioResponseDTO toDTO(Usuario usuario);
     @Mapping(target = "nota", constant = "0.0")
     @Mapping(target = "totalResenhas", constant = "0L")
     @Mapping(target = "resenhas", ignore = true)
+    @Mapping(target = "precos", ignore = true)
     Jogo toEntity(JogoRequestDTO dto);
-}
+
+    // --- PREÇO ---
+    PrecoResponseDTO toDTO(Preco preco);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "jogo", ignore = true)
+    Preco toEntity(PrecoRequestDTO dto);
+    }

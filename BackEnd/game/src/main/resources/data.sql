@@ -652,3 +652,137 @@ INSERT INTO tbl_comentarios (id, usuario_id, resenha_id, texto, data) VALUES
 
 (127, 24, 41, 'Undertale continua sendo uma experiência única.', '2025-07-31'),
 (128, 88, 41, 'Os personagens são impossíveis de esquecer.', '2025-07-31');
+
+INSERT INTO tbl_precos
+(nome, logo, preco, preco_original, desconto, link, melhor_preco, jogo_id)
+VALUES
+
+-- Ultrakill
+('Steam','lojas/steam.png','R$ 46,49','R$ 61,99',25,'https://store.steampowered.com/app/1229490',FALSE,1),
+('Nuuvem','lojas/nuuvem.png','R$ 42,99','R$ 61,99',31,'https://www.nuuvem.com',TRUE,1),
+('Fanatical','lojas/fanatical.png','R$ 44,99','R$ 61,99',27,'https://www.fanatical.com',FALSE,1),
+
+-- Enter the Gungeon
+('Steam','lojas/steam.png','R$ 36,99','R$ 36,99',0,'https://store.steampowered.com/app/311690',FALSE,2),
+('Nuuvem','lojas/nuuvem.png','R$ 33,99','R$ 36,99',8,'https://www.nuuvem.com',TRUE,2),
+('Fanatical','lojas/fanatical.png','R$ 35,49','R$ 36,99',4,'https://www.fanatical.com',FALSE,2),
+
+-- Iron Lung
+('Steam','lojas/steam.png','R$ 28,99','R$ 28,99',0,'https://store.steampowered.com',TRUE,3),
+('Fanatical','lojas/fanatical.png','R$ 27,49','R$ 28,99',5,'https://www.fanatical.com',FALSE,3),
+
+-- Deltarune
+('Steam','lojas/steam.png','Gratuito',NULL,NULL,'https://store.steampowered.com',TRUE,4),
+
+-- Mullet Madjack
+('Steam','lojas/steam.png','R$ 59,99','R$ 79,99',25,'https://store.steampowered.com',FALSE,5),
+('Nuuvem','lojas/nuuvem.png','R$ 54,99','R$ 79,99',31,'https://www.nuuvem.com',TRUE,5),
+
+-- Dust
+('Steam','lojas/steam.png','R$ 37,99','R$ 37,99',0,'https://store.steampowered.com',FALSE,6),
+('Fanatical','lojas/fanatical.png','R$ 35,99','R$ 37,99',5,'https://www.fanatical.com',TRUE,6),
+
+-- Uktena 64
+('Steam','lojas/steam.png','R$ 24,99','R$ 24,99',0,'https://store.steampowered.com',TRUE,7),
+
+-- Hotline Miami
+('Steam','lojas/steam.png','R$ 18,49','R$ 36,99',50,'https://store.steampowered.com',FALSE,8),
+('Nuuvem','lojas/nuuvem.png','R$ 16,99','R$ 36,99',54,'https://www.nuuvem.com',TRUE,8),
+
+-- Gravity Circuit
+('Steam','lojas/steam.png','R$ 54,99','R$ 54,99',0,'https://store.steampowered.com',FALSE,9),
+('Fanatical','lojas/fanatical.png','R$ 49,99','R$ 54,99',9,'https://www.fanatical.com',TRUE,9),
+
+-- Balatro
+('Steam','lojas/steam.png','R$ 44,99','R$ 44,99',0,'https://store.steampowered.com',FALSE,10),
+('Nuuvem','lojas/nuuvem.png','R$ 41,99','R$ 44,99',7,'https://www.nuuvem.com',TRUE,10),
+
+-- BALL X PIT
+('Steam','lojas/steam.png','R$ 59,99','R$ 59,99',0,'https://store.steampowered.com',TRUE,11),
+
+-- Lost in Vivo
+('Steam','lojas/steam.png','R$ 28,99','R$ 28,99',0,'https://store.steampowered.com',FALSE,12),
+('Fanatical','lojas/fanatical.png','R$ 26,99','R$ 28,99',7,'https://www.fanatical.com',TRUE,12),
+
+-- Super Galaxy Squadron
+('Steam','lojas/steam.png','R$ 20,69','R$ 68,99',70,'https://store.steampowered.com',TRUE,13),
+
+-- Mycopunk
+('Steam','lojas/steam.png','R$ 73,99','R$ 73,99',0,'https://store.steampowered.com',FALSE,14),
+('Nuuvem','lojas/nuuvem.png','R$ 69,99','R$ 73,99',5,'https://www.nuuvem.com',TRUE,14),
+
+-- Noita
+('Steam','lojas/steam.png','R$ 73,99','R$ 73,99',0,'https://store.steampowered.com',FALSE,15),
+('Fanatical','lojas/fanatical.png','R$ 69,99','R$ 73,99',5,'https://www.fanatical.com',TRUE,15),
+
+-- Amid Evil
+('Steam','lojas/steam.png','R$ 61,99','R$ 61,99',0,'https://store.steampowered.com',FALSE,16),
+('Nuuvem','lojas/nuuvem.png','R$ 57,99','R$ 61,99',6,'https://www.nuuvem.com',TRUE,16),
+
+-- A Wolf in Autumn
+('Steam','lojas/steam.png','R$ 39,99','R$ 39,99',0,'https://store.steampowered.com',TRUE,17),
+
+-- Chop Goblins
+('Steam','lojas/steam.png','R$ 28,99','R$ 28,99',0,'https://store.steampowered.com',FALSE,18),
+('Fanatical','lojas/fanatical.png','R$ 25,99','R$ 28,99',10,'https://www.fanatical.com',TRUE,18),
+
+-- Cult of the Lamb
+('Steam','lojas/steam.png','R$ 73,99','R$ 92,49',20,'https://store.steampowered.com',FALSE,19),
+('Nuuvem','lojas/nuuvem.png','R$ 69,99','R$ 92,49',24,'https://www.nuuvem.com',TRUE,19),
+
+-- Your Only Move is HUSTLE
+('Steam','lojas/steam.png','R$ 28,99','R$ 28,99',0,'https://store.steampowered.com',TRUE,20),
+
+-- My Friend Pedro
+('Steam','lojas/steam.png','R$ 36,99','R$ 36,99',0,'https://store.steampowered.com',FALSE,21),
+('Fanatical','lojas/fanatical.png','R$ 32,99','R$ 36,99',11,'https://www.fanatical.com',TRUE,21),
+
+-- Lunacid
+('Steam','lojas/steam.png','R$ 46,49','R$ 61,99',25,'https://store.steampowered.com',FALSE,22),
+('Nuuvem','lojas/nuuvem.png','R$ 44,99','R$ 61,99',27,'https://www.nuuvem.com',TRUE,22),
+
+-- Celeste
+('Steam','lojas/steam.png','R$ 36,99','R$ 92,49',60,'https://store.steampowered.com',FALSE,23),
+('Fanatical','lojas/fanatical.png','R$ 34,99','R$ 92,49',62,'https://www.fanatical.com',TRUE,23),
+
+-- Animal Well
+('Steam','lojas/steam.png','R$ 73,99','R$ 73,99',0,'https://store.steampowered.com',TRUE,24),
+
+-- AntonBlast
+('Steam','lojas/steam.png','R$ 61,99','R$ 61,99',0,'https://store.steampowered.com',FALSE,25),
+('Nuuvem','lojas/nuuvem.png','R$ 58,99','R$ 61,99',5,'https://www.nuuvem.com',TRUE,25),
+
+-- Buckshot Roulette
+('Steam','lojas/steam.png','R$ 17,99','R$ 23,99',25,'https://store.steampowered.com',FALSE,26),
+('Fanatical','lojas/fanatical.png','R$ 16,99','R$ 23,99',29,'https://www.fanatical.com',TRUE,26),
+
+-- 9 Kings
+('Steam','lojas/steam.png','R$ 39,99','R$ 39,99',0,'https://store.steampowered.com',TRUE,27),
+
+-- Arsonate
+('Steam','lojas/steam.png','R$ 59,99','R$ 59,99',0,'https://store.steampowered.com',TRUE,28),
+
+-- Exit the Gungeon
+('Steam','lojas/steam.png','R$ 28,99','R$ 36,99',22,'https://store.steampowered.com',FALSE,29),
+('Nuuvem','lojas/nuuvem.png','R$ 25,99','R$ 36,99',30,'https://www.nuuvem.com',TRUE,29),
+
+-- Jogos 30 ao 43 (mesmo padrão)
+('Steam','lojas/steam.png','R$ 32,99','R$ 32,99',0,'https://store.steampowered.com',TRUE,30),
+('Steam','lojas/steam.png','R$ 73,99','R$ 92,49',20,'https://store.steampowered.com',FALSE,31),
+('Nuuvem','lojas/nuuvem.png','R$ 69,99','R$ 92,49',24,'https://www.nuuvem.com',TRUE,31),
+('Steam','lojas/steam.png','R$ 18,49','R$ 36,99',50,'https://store.steampowered.com',TRUE,32),
+('Steam','lojas/steam.png','R$ 46,49','R$ 61,99',25,'https://store.steampowered.com',TRUE,33),
+('Steam','lojas/steam.png','R$ 73,99','R$ 73,99',0,'https://store.steampowered.com',TRUE,34),
+('Steam','lojas/steam.png','R$ 28,99','R$ 28,99',0,'https://store.steampowered.com',TRUE,35),
+('Steam','lojas/steam.png','R$ 92,49','R$ 92,49',0,'https://store.steampowered.com',FALSE,36),
+('Fanatical','lojas/fanatical.png','R$ 87,99','R$ 92,49',5,'https://www.fanatical.com',TRUE,36),
+('Steam','lojas/steam.png','R$ 73,99','R$ 92,49',20,'https://store.steampowered.com',FALSE,37),
+('Nuuvem','lojas/nuuvem.png','R$ 69,99','R$ 92,49',24,'https://www.nuuvem.com',TRUE,37),
+('Steam','lojas/steam.png','Gratuito',NULL,NULL,'https://store.steampowered.com',TRUE,38),
+('Steam','lojas/steam.png','R$ 61,99','R$ 61,99',0,'https://store.steampowered.com',FALSE,39),
+('Fanatical','lojas/fanatical.png','R$ 58,99','R$ 61,99',5,'https://www.fanatical.com',TRUE,39),
+('Steam','lojas/steam.png','R$ 59,99','R$ 59,99',0,'https://store.steampowered.com',TRUE,40),
+('Steam','lojas/steam.png','R$ 19,99','R$ 19,99',0,'https://store.steampowered.com',TRUE,41),
+('Steam','lojas/steam.png','R$ 46,49','R$ 61,99',25,'https://store.steampowered.com',FALSE,42),
+('Nuuvem','lojas/nuuvem.png','R$ 43,99','R$ 61,99',29,'https://www.nuuvem.com',TRUE,42),
+('Steam','lojas/steam.png','R$ 17,99','R$ 17,99',0,'https://store.steampowered.com',TRUE,43);

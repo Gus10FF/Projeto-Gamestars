@@ -27,6 +27,7 @@ public class JogoService {
         this.resenhaRepository = resenhaRepository;
     }
 
+    
     // --- CRIAÇÃO DE UM JOGO ---
     @Transactional
     public JogoResponseDTO criarJogo(JogoRequestDTO dto) {
